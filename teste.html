@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Horários</title>
+    <style>
+        /* Estilo da página */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #4a90e2;
+            margin-bottom: 20px;
+        }
+
+        /* Estilo do formulário */
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        input {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #357abd;
+        }
+
+        /* Estilo da tabela */
+        table {
+            width: 100%;
+            max-width: 600px;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4a90e2;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Controle de Horários</h1>
+    
+    <form id="horarioForm">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" placeholder="Digite o nome" required>
+
+        <label for="data">Data:</label>
+        <input type="date" id="data" required>
+
+        <label for="horaInicial">Hora Inicial:</label>
+        <input type="time" id="horaInicial" required>
+
+        <label for="horaFinal">Hora Final:</label>
+        <input type="time" id="horaFinal" required>
+
+        <label for="valor">Valor:</label>
+        <input type="number" id="valor" placeholder="Digite o valor" required>
+
+        <button type="button" onclick="adicionarHorario()">Adicionar Horário</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Data</th>
+                <th>Hora Inicial</th>
+                <th>Hora Final</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody id="tabelaHorarios">
+            <!-- Registros de horário irão aparecer aqui -->
+        </tbody>
+    </table>
+
+    <script>
+        function adicionarHorario() {
+            // Coleta os valores dos campos
+            const nome = document.getElementById('nome').value;
+            const data = document.getElementById('data').value;
+            const horaInicial = document.getElementById('horaInicial').value;
+            const horaFinal = document.getElementById('horaFinal').value;
+            const valor = document.getElementById('valor').value;
+
+            // Cria uma nova linha na tabela
+            const tabela = document.getElementById('tabelaHorarios');
+            const novaLinha = tabela.insertRow();
+
+            // Adiciona as células na nova linha
+            novaLinha.insertCell(0).textContent = nome;
+            novaLinha.insertCell(1).textContent = data;
+            novaLinha.insertCell(2).textContent = horaInicial;
+            novaLinha.insertCell(3).textContent = horaFinal;
+            novaLinha.insertCell(4).textContent = `R$ ${parseFloat(valor).toFixed(2)}`;
+
+            // Limpa o formulário
+            document.getElementById('horarioForm').reset();
+        }
+    </script>
+
+</body>
+</html>
